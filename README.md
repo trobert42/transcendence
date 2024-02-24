@@ -12,7 +12,7 @@ The project involves creating a website featuring an interactive Pong game and a
 
 ## Features 
 - User's features include profile data, settings, friend lists, private chats, custom avatars, game stats, and match history.
-- Authentication management is handled using the 42 API (OAuth) and Google Authenticator for 2FA.
+- Authentication management is handled using the 42 API (OAuth2) and Google Authenticator for 2FA.
 - Database management employs an ORM (Object Relational Mapping), Prisma, connecting the server to a PostgreSQL database, ensuring password security and protection against injections via POST forms.
 - The frontend built using React, on port __3333__.
 - The Backend development utilizes NestJS, providing a project architecture and tools for creating a REST API to enable coherent and structured communication between systems via HTTP. On port __3000__.
