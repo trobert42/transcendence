@@ -37,3 +37,8 @@ To run the project, you have to install __docker-compose and docker__. You need 
 When the containers are done building up and are running, you go to your chrome browser (firefox also works) and write on the URL bar "localhost:3000" to access to the application.
 
 ## Screenshots
+
+
+## 💬
+Big thanks to Antoine, Pierre, Elsie and Cyril! We ended the final project together, we can be proud :D
+It was a wonderful group experience. I think we gained valuable experience in collaboration, problem-solving, and technical skills development. I really feel a sense of accomplishment and satisfaction in seeing our project come to fruition despite the challenges we faced along the way !
