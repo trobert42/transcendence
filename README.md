@@ -31,8 +31,8 @@ To run the project, you have to install __docker-compose and docker__. You need 
   code .env #or vi .env
 ```
 
-You have to put a password for the jwt secret and for the refresh jwt. You need also to put your __42 API credentials__.
-```shell
+You have to put a password for the jwt secret and for the refresh jwt secret. You need also to put your __42 API credentials__, if you don't it won't work.
+```bash
 ...
 JWT_SECRET=""
 JWT_REFRESH_SECRET=""
@@ -42,6 +42,9 @@ API_42_PWD=""
 ```
 
 ## Usage
+```bash
+  make
+```
 When the containers are done building up and are running, you go to your chrome browser (firefox also works) and write on the URL bar "localhost:3000" to access to the application.
 
 ## Screenshots
