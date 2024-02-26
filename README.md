@@ -27,7 +27,18 @@ To run the project, you have to install __docker-compose and docker__. You need 
 ```bash
   gcl https://github.com/trobert42/transcendence.git
   cd transcendence
-  make
+  mv example.env .env
+  code .env #or vi .env
+```
+
+You have to put a password for the jwt secret and for the refresh jwt. You need also to put your __42 API credentials__.
+```shell
+...
+JWT_SECRET=""
+JWT_REFRESH_SECRET=""
+API_42_UID=""
+API_42_PWD=""
+...
 ```
 
 ## Usage
