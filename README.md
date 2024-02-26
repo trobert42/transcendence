@@ -38,6 +38,10 @@ When the containers are done building up and are running, you go to your chrome 
 
 ## Screenshots
 
+![Image Description](https://github.com/trobert42/transcendence/blob/main/transcendence.png)) Here's the ideas we reunite and draw on figma :
+
+And look how the website end up ! We succeed to realize what we wanted to as display o/
+![](https://github.com/trobert42/transcendence/blob/main/transcendence_clip.gif)
 
 ## 💬
 Big thanks to Antoine, Pierre, Elsie and Cyril! We ended the final project together, we can be proud :D
