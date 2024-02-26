@@ -1,0 +1,169 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccessMode {
+  PUBLIC
+  PROTECTED
+  PRIVATE
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  hash      String
+  firstname String
+  lastname  String
+  avatarLink   String
+  isLogged     Boolean @default(false)
+  is42User     Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  refreshToken  String
+  access42Token String
+
+
+  isInGame Boolean @default(false)
+  isDoneRegister Boolean @default(false)
+  is2FAEnabled Boolean @default(false)
+  twoFASecret  String
+
+  friendshipsInitiated Friendship[] @relation("initiator")
+  friendshipsReceived Friendship[] @relation("receiver")
+
+  blockedUsers        User[] @relation("blockedList")
+  blockedBy           User[] @relation("blockedList")
+
+  messages           Message[]
+  privateChats       PrivateChat[]
+  channelsOwned      Channel[]
+  channelsMemberOf   Channel[] @relation("MemberUserToChannel")
+  channelsAdminOf    Channel[] @relation("AdminUserToChannel")
+  channelsBannedFrom Channel[] @relation("BannedUserToChannel")
+  channelsMutedFrom  Channel[] @relation("MutedUserToChannel")
+  banDurations       BanDuration[]
+  mutedDurations     MuteDuration[]
+  channelJoinReq     ChannelJoinReq[]
+  gamesWon           Games[]   @relation("WinnerOfGame")
+  gamesLoose         Games[]   @relation("LooserOfGame")
+
+  @@map("users")
+}
+
+model Friendship {
+  id       Int     @id @default(autoincrement())
+  accepted Boolean @default(false)
+
+  initiator   User @relation("initiator", fields: [initiatorId], references: [id])
+  initiatorId Int
+
+  receiver   User @relation("receiver", fields: [receiverId], references: [id])
+  receiverId Int
+}
+
+model Message {
+  id              Int @id @default(autoincrement())
+  content         String
+  authorId        Int
+  chatPostedInId  Int
+  createdAt       DateTime @default(now())
+
+  author          User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  chatPostedIn    ChatEntity @relation(fields: [chatPostedInId], references: [id], onDelete: Cascade)
+}
+
+model MuteDuration {
+  id  Int @id @default(autoincrement())
+  until DateTime
+
+  userId    Int
+  User      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channelId Int
+  Channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+}
+
+model BanDuration {
+  id  Int @id @default(autoincrement())
+  until DateTime
+
+  userId    Int
+  User      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channelId Int
+  Channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+}
+
+model Channel {
+  id        Int @id @default(autoincrement())
+  name      String
+  access    AccessMode @default(PRIVATE)
+  password  String?
+
+  chatId  Int @unique
+  chat    ChatEntity @relation(fields: [chatId], references: [id])
+
+  ownerId   Int?
+  owner     User? @relation(fields: [ownerId], references: [id])
+  admins    User[] @relation("AdminUserToChannel")
+  members   User[] @relation("MemberUserToChannel")
+  banned    User[] @relation("BannedUserToChannel")
+  muted     User[] @relation("MutedUserToChannel")
+  banDurations  MuteDuration[]
+  muteDurations BanDuration[]
+  joinRequests  ChannelJoinReq[] @relation()
+}
+
+model ChannelJoinReq {
+  id        Int @id @default(autoincrement())
+  approved  Boolean
+
+  channelId Int
+  Channel   Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  userId    Int
+  User      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PrivateChat {
+  id    Int @id @default(autoincrement())
+  users User[]
+
+  chatId  Int @unique
+  chat    ChatEntity @relation(fields: [chatId], references: [id])
+}
+
+model ChatEntity {
+  id  Int @id @default(autoincrement())
+  messages  Message[]
+
+  channel Channel?
+  privateChat PrivateChat?
+}
+
+model Leaderboard {
+    id                String          @id @unique @default(uuid())
+    gamesPlayed       Int
+    game              Games[]
+}
+
+model Games {
+    id                String      @id @unique @default(uuid())
+    gameDate          DateTime    @default(now())
+    player1           Int
+    player2           Int
+    resultatStatut    String
+    scorePlayer1      Int
+    scorePlayer2      Int
+    leaderboard       Leaderboard @relation(fields: [leaderboardId], references: [id])
+    leaderboardId     String
+    winnerUser        User       @relation("WinnerOfGame" , fields: [winner], references: [id])
+    winner            Int
+    otherUser         User       @relation("LooserOfGame" , fields: [looser], references: [id])
+    looser            Int
+}
