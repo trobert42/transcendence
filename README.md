@@ -23,9 +23,7 @@ The project involves creating a website featuring an interactive Pong game and a
 
 ## Prerequisite
 
-To run the project, you have to install __docker-compose and docker__. You need to setup __example.env with your credentials__ and __42 API credentials__.
-
-
+To run the project, you have to install __docker-compose and docker__. You need to setup the file __.env with your credentials__ and __42 API credentials__.
 ```bash
   gcl https://github.com/trobert42/transcendence.git
   cd transcendence
@@ -33,7 +31,6 @@ To run the project, you have to install __docker-compose and docker__. You need 
 ```
 
 ## Usage
-
 When the containers are done building up and are running, you go to your chrome browser (firefox also works) and write on the URL bar "localhost:3000" to access to the application.
 
 ## Screenshots
