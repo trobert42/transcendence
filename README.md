@@ -37,10 +37,10 @@ To run the project, you have to install __docker-compose and docker__. You need 
 When the containers are done building up and are running, you go to your chrome browser (firefox also works) and write on the URL bar "localhost:3000" to access to the application.
 
 ## Screenshots
+Here are the ideas we gathered and drew on Figma:
+![](https://github.com/trobert42/transcendence/blob/main/transcendence_figma.png)
 
-![Image Description](https://github.com/trobert42/transcendence/blob/main/transcendence.png)) Here's the ideas we reunite and draw on figma :
-
-And look how the website end up ! We succeed to realize what we wanted to as display o/
+And look how the website ended up ! We succeed to realize what we wanted to display.
 ![](https://github.com/trobert42/transcendence/blob/main/transcendence_clip.gif)
 
 ## 💬
